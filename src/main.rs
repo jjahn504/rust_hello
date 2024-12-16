@@ -287,6 +287,6 @@ fn main() {
         println!("{}", data_clone); // Output: Hello, Arc! 
     }); 
     handle.join().unwrap();
-
+    //git 시작했음 
     
 }
