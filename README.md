@@ -1,2 +1,1 @@
-# rust_hello
-# rust_hello
+# I am studing 'rust' and 'github'.
