@@ -152,6 +152,23 @@ fn process_data_3(input: &str) -> Cow<str> {
 //---------------------------------
 //Rc (Reference Counted) and Arc (Atomic Reference Counted)
 //---------------------------------
+// Good example using Box for heap allocation and dynamic dispatch 
+trait Animal { 
+    fn speak(&self); 
+} 
+struct Dog_2; 
+struct Cat_2; 
+impl Animal for Dog_2 { 
+    fn speak(&self) { 
+        println!("개: 멍 멍!"); 
+    } 
+} 
+impl Animal for Cat_2 { 
+    fn speak(&self) { 
+        println!("고양이: 야옹 야옹!"); 
+    } 
+} 
+//---------------------------------
 #[allow(unused_imports)]
 use std::rc::Rc; 
 use std::sync::Arc; 
@@ -287,8 +304,10 @@ fn main() {
         println!("{}", data_clone); // Output: Hello, Arc! 
     }); 
     handle.join().unwrap();
-    //git 시작했음 
-    //git 시작했음(2) 
-    
+    println!("------------------------------------");    
+    let animals: Vec<Box<dyn Animal>> = vec![Box::new(Dog_2), Box::new(Cat_2)]; 
+    for animal in animals { 
+        animal.speak(); 
+    }
     
 }
