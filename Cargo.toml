@@ -6,6 +6,6 @@ edition = "2021"
 [dependencies]
 ndarray = "0.16.1"
 random = "0.14.0"
-tokio = "1.42.0"
+tokio = {version = "1.42.0", features = ["full"] }
 
 

@@ -4,8 +4,16 @@
 const MAX_USERS: u32 = 1000; 
 // Using `static` for global constants 
 static APP_NAME: &str = "MyApp";
-
-fn divide(a: f64, b: f64) -> Result<f64, &'static str> { 
+//=============================== async, await
+use tokio::time::{sleep, Duration}; 
+// An asynchronous function that simulates a delay 
+async fn perform_task() { 
+    println!("Task started"); 
+    sleep(Duration::from_secs(5)).await; //== 5초간 프로그램 진행 정지
+    println!("Task completed"); 
+} 
+//===============================
+async fn divide(a: f64, b: f64) -> Result<f64, &'static str> { 
     if b == 0.0 { 
         Err("Cannot divide by zero") 
     } else { 
@@ -174,13 +182,24 @@ use std::rc::Rc;
 use std::sync::Arc; 
 use std::thread; 
 //---------------------------------
-fn main() {
-    match divide(4.0, 2.0) { 
+//================================= async, await
+#[tokio::main] 
+async fn main() { 
+    println!("Starting main function"); 
+    perform_task().await; //=== 프로그램 진행 정지
+    match divide(4.0, 2.0).await { 
+        Ok(result) => println!("Result: {}", result), 
+        Err(e) => println!("Error: {}", e), 
+    } 
+    println!("Main function completed"); 
+    println!("------------------------------------");
+//fn main() {
+    match divide(4.0, 2.0).await { 
         Ok(result) => println!("Result: {}", result), 
         Err(e) => println!("Error: {}", e), 
     } 
     println!("------------------------------------");
-    match divide(4.0, 0.0) { 
+    match divide(4.0, 0.0).await { 
         Ok(result) => println!("Result: {}", result), 
         Err(e) => println!("Error: {}", e), 
     } 
@@ -213,6 +232,8 @@ fn main() {
     let result2 = process_data(owned_data); 
     println!("Result 1: {}", result1); 
     println!("Result 2: {}", result2); 
+    println!("Result 1_2: {}", result1); 
+    println!("Result 2_2: {}", result2); 
     println!("------------------------------------");
     let data = Rc::new(vec![1, 2, 3]); 
     let data_clone = Rc::clone(&data); 
