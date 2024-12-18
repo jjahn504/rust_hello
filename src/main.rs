@@ -347,4 +347,19 @@ async fn main() {
     let height = 10.0; 
     let area = geometry::calculate_area(width, height); 
     printer::print_area(area);    
+    println!("------------------------------------");    
+    // Create a new, empty vector to store integers 
+    let mut numbers: Vec<i32> = Vec::new(); 
+    // Add some elements to the vector 
+    for i in (1..10).rev() {
+        numbers.push(i); 
+    }
+    // Iterate over the vector and print each element 
+    for number in &numbers { 
+        println!("{}", number); 
+    } 
+    // Remove the last element 
+    numbers.pop(); 
+    // Print the modified vector 
+    println!("After pop: {:?}", numbers);
 }
