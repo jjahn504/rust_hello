@@ -182,6 +182,18 @@ use std::rc::Rc;
 use std::sync::Arc; 
 use std::thread; 
 //---------------------------------
+// module for geometry-related functions 
+mod geometry { 
+    pub fn calculate_area(width: f64, height: f64) -> f64 { 
+        width * height 
+    } 
+} 
+// module for printing-related functions 
+mod printer { 
+    pub fn print_area(area: f64) {
+        println!("The area of the rectangle is: {}", area); 
+    } 
+}
 //================================= async, await
 #[tokio::main] 
 async fn main() { 
@@ -330,5 +342,9 @@ async fn main() {
     for animal in animals { 
         animal.speak(); 
     }
-    
+    println!("------------------------------------");    
+    let width = 5.0; 
+    let height = 10.0; 
+    let area = geometry::calculate_area(width, height); 
+    printer::print_area(area);    
 }
